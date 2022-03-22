@@ -5,7 +5,7 @@
                 active-text-color="#ffd04b"
                 :background-color="backgroundColor"
                 class="el-menu-vertical"
-                default-active="2"
+                default-active="1"
                 text-color="#fff"
                 @open="handleOpen"
                 @close="handleClose"
@@ -15,10 +15,14 @@
                         <el-icon>
                             <home-filled />
                         </el-icon>
-                        <span>场景初始化</span>
+                        <span>{{initOptions.title}}</span>
                     </template>
-                    <el-menu-item index="1-1">item one</el-menu-item>
-                    <el-menu-item index="1-2">item one</el-menu-item>
+                    <el-menu-item
+                        v-for="item in initOptions.children"
+                        :index="item.index"
+                        :key="item.index"
+                        @click="emit('handleLocation', item.index, item.name)"
+                    >{{ item.name }}</el-menu-item>
                 </el-sub-menu>
                 <el-sub-menu index="2">
                     <template #title>
@@ -57,11 +61,22 @@
 </template>
 
 <script lang="ts" setup>
+import { defineEmits } from 'vue'
 import {
     CopyDocument,
     HomeFilled,
-    Coin, View, Setting
+    Coin,
+    Setting
 } from '@element-plus/icons-vue'
+
+const initOptions = {
+    title: '场景初始化',
+    children: [
+        { index: 'createScene', name: '创建场景' },
+        { index: 'mapEvent', name: '场景控制' }
+    ]
+}
+const emit = defineEmits(['handleLocation'])
 
 const backgroundColor: string = '#545c64'
 
@@ -71,6 +86,7 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+
 </script>
 
 <style>
