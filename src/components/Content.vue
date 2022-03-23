@@ -1,16 +1,54 @@
 <template>
-    <h1>主体部分</h1>
     <span>当前应该定位到 ---- {{ currentLocation }} 位置</span>
-    <br>
-    <br>
+    <br />
     <el-row :gutter="20">
+        <el-col class="title" id="test1">位置一</el-col>
+        <el-col :span="4" v-for="item in  3" :key="item">
+            <el-card shadow="always">
+                <div class="img">
+                    <img src="../assets/cover.jpeg" alt="coverImage" />
+                </div>
+                <div class="text">
+                    <span>demo 示例{{ item }}</span>
+                </div>
+            </el-card>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20" id="createScene">
+        <el-col class="title">创建场景</el-col>
         <el-col :span="4" v-for="item in 7" :key="item">
             <el-card shadow="always">
                 <div class="img">
                     <img src="../assets/cover.jpeg" alt="coverImage" />
                 </div>
-                <div class='text'>
-                    <span>demo 示例{{item}}</span>
+                <div class="text">
+                    <span>demo 示例{{ item }}</span>
+                </div>
+            </el-card>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20"  id="mapEvent">
+        <el-col class="title">场景控制</el-col>
+        <el-col :span="4" v-for="item in 2" :key="item">
+            <el-card shadow="always">
+                <div class="img">
+                    <img src="../assets/cover.jpeg" alt="coverImage" />
+                </div>
+                <div class="text">
+                    <span>demo 示例{{ item }}</span>
+                </div>
+            </el-card>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col class="title" id="test2">位置四</el-col>
+        <el-col :span="4" v-for="item in  7" :key="item">
+            <el-card shadow="always">
+                <div class="img">
+                    <img src="../assets/cover.jpeg" alt="coverImage" />
+                </div>
+                <div class="text">
+                    <span>demo 示例{{ item }}</span>
                 </div>
             </el-card>
         </el-col>
@@ -18,11 +56,28 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, watch } from 'vue'
 
-defineProps<{
-    currentLocation: string
+const props = defineProps<{
+    currentLocation: string;
 }>()
+
+const handleScroller = (id: string) => {
+    const dom = document.getElementById(id)
+    const top = dom?.offsetTop ? dom.offsetTop - 80: 0
+    document.getElementById('content-container')?.scrollTo({
+        top,
+        behavior: 'smooth'
+    });
+}
+
+watch(
+    () => props.currentLocation,
+    (now, prev) => {
+        handleScroller(now)
+        console.log(now, prev);
+    }
+)
 
 </script>
 

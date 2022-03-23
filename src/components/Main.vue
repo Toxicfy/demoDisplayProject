@@ -9,7 +9,6 @@ import {ElMessage} from 'element-plus'
 let currentLocation = ref('')
 const headerHeight: string = '60px'
 const handleLocation = (key: string, name: string) => {
-    console.log(key, name)
     currentLocation.value = key
     ElMessage({
       type: 'success', 
@@ -25,7 +24,7 @@ const handleLocation = (key: string, name: string) => {
       <el-aside width="200px">
         <Aside class="aside-container" @handleLocation="handleLocation"/>
       </el-aside>
-      <el-main>
+      <el-main id="content-container">
         <Content :currentLocation="currentLocation"/>
       </el-main>
     </el-container>

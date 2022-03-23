@@ -11,3 +11,19 @@ a demo display project by Vue 3 + Typescript + Vite
   }
 }
 ```
+
+- vue3 中监听 props 传入的值
+```javaScript 
+import { defineProps, watch } from 'vue'
+
+const props = defineProps<{
+    currentLocation: string;
+}>()
+
+watch(
+    () => props.currentLocation, 
+    (now, prev) => {
+      // doing
+    }
+)
+```

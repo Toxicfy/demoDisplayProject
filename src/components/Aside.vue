@@ -69,6 +69,7 @@ import {
     Setting
 } from '@element-plus/icons-vue'
 
+const backgroundColor: string = '#545c64'
 const initOptions = {
     title: '场景初始化',
     children: [
@@ -77,9 +78,6 @@ const initOptions = {
     ]
 }
 const emit = defineEmits(['handleLocation'])
-
-const backgroundColor: string = '#545c64'
-
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
