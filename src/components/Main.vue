@@ -39,6 +39,6 @@ const handleLocation = (key: string, name: string) => {
   height: 100%;
 }
 .el-container {
-  height: calc(100% - v-bind(headerHeight))
+  height: calc(100vh - v-bind(headerHeight))
 }
 </style>
