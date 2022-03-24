@@ -16,7 +16,7 @@
     </el-row>
     <el-row :gutter="20" id="createScene">
         <el-col class="title">创建场景</el-col>
-        <el-col :span="4" v-for="item in 7" :key="item">
+        <el-col :span="4" v-for="item in 7" :key="item" @click="handlePreviewData('test')">
             <el-card shadow="always">
                 <div class="img">
                     <img src="../assets/cover.jpeg" alt="coverImage" />
@@ -57,7 +57,8 @@
 
 <script setup lang="ts">
 import { defineProps, watch } from 'vue'
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const props = defineProps<{
     currentLocation: string;
 }>()
@@ -69,6 +70,17 @@ const handleScroller = (id: string) => {
         top,
         behavior: 'smooth'
     });
+}
+
+const handlePreviewData = (id: string) => {
+    const href = router.resolve({
+        name: 'preview',
+        path: `/preview`,
+        params: {
+            id
+        }
+    })
+    window.open(href.href, '_blank')
 }
 
 watch(
