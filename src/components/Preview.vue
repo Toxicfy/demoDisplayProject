@@ -31,10 +31,8 @@ import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 
 const currentPreviewId = ref(router.currentRoute.value.params.id)
-const isResize = ref(false)
 const showCodeEditor = ref(true)
-let downPosition: number = 0
-let editor = null
+let editor: any = null
 
 self.MonacoEnvironment = {
   getWorker(workerId, label) {
@@ -48,22 +46,31 @@ self.MonacoEnvironment = {
 const handleExecuteCode = () => {
   if (editor) {
     const value = editor.getValue()
-    document.getElementById('codeIframe').srcdoc = value
+    const iframe = document.getElementById('codeIframe') as HTMLIFrameElement
+    if (iframe) {
+      iframe.srcdoc = value
+    }
   }
 }
 const handleHideCodeEditor = () => {
   showCodeEditor.value = false
-  document.querySelector('.iframe-container').style.width = '100%'
+  const iframeContainer = document.querySelector('.iframe-container') as HTMLElement
+  if (iframeContainer) {
+    iframeContainer.style.width = '100%'
+  }
 }
 const handleOpenCodeEditor = () => {
   showCodeEditor.value = true
-  document.querySelector('.iframe-container').style.width = '60%'
+  const iframeContainer = document.querySelector('.iframe-container') as HTMLElement
+  if (iframeContainer) {
+    iframeContainer.style.width = '60%'
+  }
 }
 
 // 页面初始化完成
 onMounted(() => {
   const htmlModel = monaco.editor.createModel(data[currentPreviewId.value], 'html')
-  const codeContainer = document.querySelector('.code-editor')
+  const codeContainer = document.querySelector('.code-editor') as HTMLElement
   // 创建代码编辑器
   editor = monaco.editor.create(codeContainer, {
     model: htmlModel,
@@ -109,7 +116,6 @@ onMounted(() => {
   color: white;
   margin: 0 10px;
 }
-
 
 .iframe-container {
   width: 60%;

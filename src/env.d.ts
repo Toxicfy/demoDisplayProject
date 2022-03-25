@@ -6,3 +6,8 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+// 扩展 window 属性
+declare interface Window {
+    MonacoEnvironment: any;
+}

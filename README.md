@@ -27,3 +27,21 @@ watch(
     }
 )
 ```
+
+- 扩展 env.d.ts
+```ts
+// 扩展 window 属性
+declare interface Window {
+    MonacoEnvironment: any;
+}
+```
+
+
+- build 打包的文件路径修改
+```javascript
+// vite.config.ts
+{
+    // ...
+    base: './'
+}
+```
